@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Yummie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            background: linear-gradient(135deg, #ff5a00, #ff914d);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background: white;
+            padding: 40px;
+            width: 350px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .login-container h2 {
+            margin-bottom: 25px;
+            color: #ff5a00;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .input-group input:focus {
+            border-color: #ff5a00;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #ff5a00;
+            color: white;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .login-btn:hover {
+            background: black;
+        }
+
+        .back-home {
+            margin-top: 15px;
+            display: block;
+            text-decoration: none;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .back-home:hover {
+            color: #ff5a00;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Login to Yummie</h2>
+
+        <div class="input-group">
+            <label>Email Address</label>
+            <input type="email" id="email" placeholder="Enter your email">
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Enter your password">
+        </div>
+
+        <button class="login-btn" onclick="loginUser()">Login</button>
+
+        <a href="sign-in.html" class="back-home">Don't have an account? Sign Up</a>
+        <a href="index.html" class="back-home">← Back to Home</a>
+    </div>
+
+<script>
+function loginUser(){
+
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value.trim();
+
+    if(email === "" || password === ""){
+        alert("Please fill all fields");
+        return;
+    }
+
+    // Get stored account
+    let storedData = localStorage.getItem("yummieAccount");
+
+    if(!storedData){
+        alert("No account found. Please sign up first.");
+        return;
+    }
+
+    let userData = JSON.parse(storedData);
+
+    // Check credentials
+    if(email === userData.email && password === userData.password){
+
+        // Login success
+        localStorage.setItem("yummieUser", userData.name);
+        alert("Login successful!");
+        window.location.href = "index.html";
+
+    } else {
+        alert("Invalid email or password!");
+    }
+}
+</script>
+
+</body>
+</html>

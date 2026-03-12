@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swiggy UI Clone</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+}
+
+/* Header */
+.header{
+    background:#fff;
+    padding:15px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+.location{
+    font-weight:bold;
+    font-size:18px;
+}
+
+.search-box{
+    margin-top:10px;
+    display:flex;
+    align-items:center;
+    background:#f1f1f1;
+    padding:10px;
+    border-radius:10px;
+}
+
+.search-box input{
+    border:none;
+    background:transparent;
+    width:100%;
+    outline:none;
+    font-size:14px;
+}
+
+/* Offer Banner */
+.banner{
+    margin:15px;
+    background:#3dbb6a;
+    color:white;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.banner h2{
+    font-size:24px;
+}
+
+.banner p{
+    margin-top:5px;
+}
+
+/* Cards */
+.cards{
+    padding:10px;
+}
+
+.card{
+    background:#fff;
+    padding:15px;
+    border-radius:15px;
+    margin-bottom:15px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+.card h3{
+    margin-bottom:5px;
+}
+
+.tag{
+    display:inline-block;
+    margin-top:5px;
+    background:#ffe6d5;
+    color:#ff6b00;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+/* Bottom Nav */
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background:#fff;
+    display:flex;
+    justify-content:space-around;
+    padding:10px 0;
+    box-shadow:0 -2px 5px rgba(0,0,0,0.1);
+}
+
+.bottom-nav div{
+    text-align:center;
+    font-size:12px;
+    color:#888;
+}
+
+.bottom-nav .active{
+    color:#ff6b00;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Header -->
+<div class="header">
+    <div class="location">📍 Yogeshwar Building</div>
+    <div class="search-box">
+        🔍 <input type="text" placeholder="Search for 'Mango'">
+    </div>
+</div>
+
+<!-- Offer Banner -->
+<div class="banner">
+    <h2>MIN ₹50 OFF</h2>
+    <p>On Your Next Order!</p>
+</div>
+
+<!-- Cards Section -->
+<div class="cards">
+
+    <div class="card">
+        <h3>Food Delivery</h3>
+        <p>From Restaurants</p>
+        <span class="tag">Up to 60% OFF</span>
+    </div>
+
+    <div class="card">
+        <h3>Instamart</h3>
+        <p>Get Anything Instantly</p>
+        <span class="tag">Free Delivery at ₹49</span>
+    </div>
+
+    <div class="card">
+        <h3>Dineout</h3>
+        <p>GIRF is Here</p>
+        <span class="tag">Up to 50% OFF</span>
+    </div>
+
+</div>
+
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+    <div class="active">🏠<br>Swiggy</div>
+    <div>🍔<br>Food</div>
+    <div>🛒<br>Instamart</div>
+    <div>🍽<br>Dineout</div>
+</div>
+
+</body>
+</html>

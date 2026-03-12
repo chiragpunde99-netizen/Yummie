@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subway - Yummie</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f2f2f2;
+}
+
+/* NAVBAR */
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 80px;
+background:#ff5a00;
+color:white;
+}
+
+.logo{
+font-size:28px;
+font-weight:800;
+}
+
+.nav-links{
+display:flex;
+gap:25px;
+align-items:center;
+}
+
+.nav-links a{
+color:white;
+text-decoration:none;
+font-weight:500;
+}
+
+.cart-link{
+position:relative;
+}
+
+.cart-badge{
+position:absolute;
+top:-8px;
+right:-14px;
+background:black;
+color:white;
+font-size:12px;
+padding:3px 7px;
+border-radius:50%;
+}
+
+/* PAGE */
+.container{
+padding:50px 80px;
+}
+
+.title{
+font-size:32px;
+margin-bottom:40px;
+}
+
+/* GRID */
+.food-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+}
+
+.food-card{
+background:white;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.food-card:hover{
+transform:translateY(-8px);
+}
+
+.food-card img{
+width:100%;
+height:350px;
+object-fit:cover;
+}
+
+.food-content{
+padding:15px;
+}
+
+.calories{
+font-size:13px;
+color:#888;
+margin-top:4px;
+}
+
+.price{
+margin:8px 0;
+font-weight:600;
+}
+
+.add-btn{
+background:#ff5a00;
+border:none;
+padding:10px;
+width:100%;
+border-radius:8px;
+color:white;
+font-weight:600;
+cursor:pointer;
+}
+
+.add-btn:hover{
+background:black;
+}
+
+@media(max-width:1000px){
+.food-grid{
+grid-template-columns:repeat(2,1fr);
+}
+}
+
+@media(max-width:768px){
+.navbar{
+flex-direction:column;
+padding:20px;
+gap:15px;
+}
+.container{
+padding:20px;
+}
+.food-grid{
+grid-template-columns:1fr;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+<div class="logo">Yummie</div>
+<div class="nav-links">
+<a href="restaurants.html">Restaurants</a>
+
+<a href="cart.html" class="cart-link">
+Cart 🛒
+<span id="cartCount" class="cart-badge">0</span>
+</a>
+
+<span id="navUser"></span>
+</div>
+</div>
+
+<div class="container">
+<div class="title">Subway Menu 🥪</div>
+
+<div class="food-grid">
+
+<!-- 1 -->
+<div class="food-card">
+<img src="vds.jpeg">
+<div class="food-content">
+<h3>Veggie Delight</h3>
+<div class="calories">🔥 210 kcal</div>
+<div class="price">₹289</div>
+</button>
+<button class="add-btn" onclick="addToCart('Veggie Delight',289,'vds.jpeg',210)">Add to Cart</button>
+</div>
+</div>
+
+<!-- 2 -->
+<div class="food-card">
+<img src="cbps.jpeg">
+<div class="food-content">
+<h3>Chilli Bean Patty Sandwich</h3>
+<div class="calories">🔥 1082 kcal</div>
+<div class="price">₹229</div>
+<button class="add-btn" onclick="addToCart('Chilli Bean Patty Sandwich',229,'cbps.jpeg',1082)">Add to Cart</button>
+</div>
+</div>
+
+<!-- 3 -->
+<div class="food-card">
+<img src="apsw.jpeg">
+<div class="food-content">
+<h3>Aloo Patty Signature Wrap</h3>
+<div class="calories">🔥 577 kcal</div>
+<div class="price">₹289</div>
+<button class="add-btn" onclick="addToCart('Aloo Patty Signature Wrap',289,'apsw.jpeg',577)">Add to Cart</button>
+</div>
+</div>
+
+<!-- 4 -->
+<div class="food-card">
+<img src="cns.jpeg">
+<div class="food-content">
+<h3>Crispers- Salt N Pepper</h3>
+<div class="calories">🔥 579 kcal</div>
+<div class="price">₹124</div>
+<button class="add-btn" onclick="addToCart('Crispers- Salt N Pepper',124,'cns.jpeg',579)">Add to Cart</button>
+</div>
+</div>
+
+<!-- 5 -->
+<div class="food-card">
+<img src="cs.jpeg">
+<div class="food-content">
+<h3>Chicken Slice Sandwich</h3>
+<div class="calories">🔥 394 kcal</div>
+<div class="price">₹269</div>
+<button class="add-btn" onclick="addToCart('Chicken Slice Sandwich',269,'cs.jpeg',394)">Add to Cart</button>
+</div>
+</div>
+
+<!-- 6 -->
+<div class="food-card">
+<img src="is.jpeg">
+<div class="food-content">
+<h3>Italian B.m.t (Lamb) Salad</h3>
+<div class="calories">🔥 367 kcal</div>
+<div class="price">₹319</div>
+<button class="add-btn" onclick="addToCart('Italian BMT',319,'is.jpeg',367)">Add to Cart</button>
+</div>
+</div>
+
+<!-- 7 -->
+<div class="food-card">
+<img src="sc.jpeg">
+<div class="food-content">
+<h3>Dark Chunk Chocolate Cookie (Eggless)</h3>
+<div class="calories">🔥 203 kcal</div>
+<div class="price">₹75</div>
+<button class="add-btn" onclick="addToCart('Dark Chunk Chocolate Cookie (Eggless)',75,'sc.jpeg',203)">Add to Cart</button>
+</div>
+</div>
+
+<!-- 8 -->
+<div class="food-card">
+<img src="ts.jpeg">
+<div class="food-content">
+<h3>Tuna Salad</h3>
+<div class="calories">🔥 380 kcal</div>
+<div class="price">₹319</div>
+<button class="add-btn" onclick="addToCart('Tuna Salad',319,'ts.jpeg',380)">Add to Cart</button>
+</div>
+</div>
+
+<!-- 9 -->
+<div class="food-card">
+<img src="css.jpeg">
+<div class="food-content">
+<h3>Raw Choco Mint Protein Shake 180ml</h3>
+<div class="calories">🔥 133 kcal</div>
+<div class="price">₹123</div>
+<button class="add-btn" onclick="addToCart('Raw Choco Mint Protein Shake 180ml',123,'css.jpeg',133)">Add to Cart</button>
+</div>
+</div>
+
+</div>
+</div>
+
+<script>
+
+/* USER CHECK */
+let user = localStorage.getItem("yummieUser");
+if(user){
+document.getElementById("navUser").innerText = "👋 " + user;
+}else{
+window.location.href = "login.html";
+}
+
+/* CART BADGE */
+function updateCartCount(){
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let count = cart.reduce((total,item)=> total + item.quantity,0);
+let badge = document.getElementById("cartCount");
+badge.innerText = count;
+badge.style.display = count > 0 ? "inline-block" : "none";
+}
+
+document.addEventListener("DOMContentLoaded", updateCartCount);
+
+/* ADD TO CART */
+function addToCart(name, price, image, calories){
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let existing = cart.find(item => item.name === name);
+
+if(existing){
+existing.quantity += 1;
+}else{
+cart.push({
+name:name,
+price:price,
+image:image,
+calories:calories,
+quantity:1
+});
+}
+
+localStorage.setItem("cart", JSON.stringify(cart));
+updateCartCount();
+
+alert(name + " added to cart!");
+}
+
+</script>
+
+</body>
+</html>

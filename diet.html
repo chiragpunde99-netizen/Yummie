@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yummie - Diet Mode</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* ================= GLOBAL ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #fff7f2;
+            overflow-x: hidden;
+        }
+
+        /* ================= NAVBAR ================= */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: #ffffff;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: #ff6b00;
+        }
+
+        .nav-links a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            position: relative;
+            transition: .3s;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0%;
+            height: 2px;
+            background: #ff6b00;
+            transition: .3s;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b00;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ================= HERO ================= */
+        .hero {
+            height: 65vh;
+            background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)),
+                url('https://images.unsplash.com/photo-1490645935967-10de6ba17061');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 20px;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 700;
+        }
+
+        .hero h1 span {
+            color: #ff6b00;
+        }
+
+        .hero p {
+            margin-top: 15px;
+            font-size: 18px;
+            opacity: .9;
+        }
+
+        /* ================= FILTERS ================= */
+        .filters {
+            margin-top: -40px;
+            padding: 30px 8%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filters select,
+        .filters input {
+            padding: 14px 20px;
+            border-radius: 40px;
+            border: none;
+            outline: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            width: 220px;
+            transition: .3s;
+        }
+
+        .filters select:focus,
+        .filters input:focus {
+            box-shadow: 0 0 0 2px #ff6b00;
+        }
+
+        .search-btn {
+            background: #ff6b00;
+            border: none;
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: .3s;
+            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.3);
+        }
+
+        .search-btn:hover {
+            background: #e55d00;
+            transform: translateY(-3px);
+        }
+
+        /* ================= MEALS ================= */
+        .meals {
+            padding: 60px 8% 100px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            transition: .4s;
+            animation: slideUp .8s ease forwards;
+            opacity: 0;
+        }
+
+        .card:nth-child(1) {
+            animation-delay: .2s;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: .4s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: .6s;
+        }
+
+        .card:nth-child(4) {
+            animation-delay: .8s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .calories {
+            color: #ff6b00;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .price {
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .order-btn {
+            background: #ff6b00;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .order-btn:hover {
+            background: #e55d00;
+            transform: scale(1.05);
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            background: #111;
+            color: #fff;
+            text-align: center;
+            padding: 25px;
+            font-size: 14px;
+        }
+
+        /* ================= ANIMATIONS ================= */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(40px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media(max-width:768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="logo">Yummie<span>.</span></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="nutri.html">Nutri Mode</a>
+            <a href="restaurants.html">Food Delivery</a>
+            <a href="#" style="color:#ff6b00;">Diet Mode</a>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div>
+            <h1>Welcome to <span>Diet Mode</span></h1>
+            <p>Eat Smart. Stay Fit. Choose meals based on calories & goals.</p>
+        </div>
+    </section>
+
+    <section class="filters">
+        <select>
+            <option>Select Goal</option>
+            <option>Weight Loss</option>
+            <option>Muscle Gain</option>
+            <option>Maintain Weight</option>
+        </select>
+
+        <select>
+            <option>Meal Type</option>
+            <option>Breakfast</option>
+            <option>Lunch</option>
+            <option>Dinner</option>
+        </select>
+
+        <input type="number" placeholder="Max Calories">
+        <button class="search-btn">Search</button>
+    </section>
+
+    <section class="meals">
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
+            <div class="card-content">
+                <h3>Grilled Chicken Salad</h3>
+                <div class="calories">350 Calories</div>
+                <div class="price">$8.99</div>
+                <button class="order-btn">Order Now</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd">
+            <div class="card-content">
+                <h3>Avocado Veggie Bowl</h3>
+                <div class="calories">420 Calories</div>
+                <div class="price">$9.49</div>
+                <button class="order-btn">Order Now</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352">
+            <div class="card-content">
+                <h3>Protein Smoothie</h3>
+                <div class="calories">250 Calories</div>
+                <div class="price">$5.99</div>
+                <button class="order-btn">Order Now</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1478144592103-25e218a04891">
+            <div class="card-content">
+                <h3>Quinoa Power Plate</h3>
+                <div class="calories">390 Calories</div>
+                <div class="price">$10.99</div>
+                <button class="order-btn">Order Now</button>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        © 2026 Yummie. All Rights Reserved.
+    </footer>
+
+</body>
+
+</html>

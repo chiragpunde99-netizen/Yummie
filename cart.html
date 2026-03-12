@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Yummie - Cart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f2f2f2;
+}
+
+/* NAVBAR */
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 80px;
+background:#ff5a00;
+color:white;
+}
+
+.logo{
+font-size:28px;
+font-weight:800;
+}
+
+.nav-links a{
+color:white;
+text-decoration:none;
+margin-left:20px;
+}
+
+/* MAIN */
+.container{
+padding:50px 80px;
+}
+
+.cart-item{
+background:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px;
+margin-bottom:15px;
+border-radius:12px;
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.left{
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+.left img{
+width:80px;
+height:80px;
+border-radius:10px;
+object-fit:cover;
+}
+
+.item-info{
+font-size:14px;
+}
+
+.calories{
+font-size:13px;
+color:#777;
+margin-top:4px;
+}
+
+.controls{
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.controls button{
+background:#ff5a00;
+border:none;
+color:white;
+width:30px;
+height:30px;
+border-radius:6px;
+cursor:pointer;
+}
+
+.controls button:hover{
+background:black;
+}
+
+.remove{
+background:red;
+padding:6px 10px;
+color:white;
+border-radius:6px;
+cursor:pointer;
+font-size:12px;
+}
+
+.summary{
+margin-top:30px;
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.summary h3{
+margin-bottom:10px;
+}
+
+.warning{
+margin-top:10px;
+color:red;
+font-weight:600;
+}
+
+.checkout-btn{
+margin-top:15px;
+width:100%;
+padding:12px;
+background:#ff5a00;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+}
+
+.checkout-btn:hover{
+background:black;
+}
+
+@media(max-width:768px){
+.navbar{
+flex-direction:column;
+padding:20px;
+}
+.container{
+padding:20px;
+}
+.cart-item{
+flex-direction:column;
+align-items:flex-start;
+gap:15px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+<div class="logo">Yummie</div>
+<div class="nav-links">
+<a href="restaurants.html">Restaurants</a>
+</div>
+</div>
+
+<div class="container">
+<h2>Your Cart 🛒</h2>
+
+<div id="cartContainer"></div>
+
+<div class="summary" id="summary"></div>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let container = document.getElementById("cartContainer");
+let summary = document.getElementById("summary");
+
+function renderCart(){
+
+container.innerHTML="";
+let subtotal=0;
+let totalCalories=0;
+
+if(cart.length === 0){
+container.innerHTML="<p>Your cart is empty.</p>";
+summary.innerHTML="";
+return;
+}
+
+cart.forEach((item,index)=>{
+
+subtotal += item.price * item.quantity;
+totalCalories += (item.calories || 0) * item.quantity;
+
+container.innerHTML += `
+<div class="cart-item">
+
+<div class="left">
+<img src="${item.image}">
+<div class="item-info">
+<div><strong>${item.name}</strong></div>
+<div>₹${item.price}</div>
+<div class="calories">🔥 ${item.calories || 0} kcal each</div>
+</div>
+</div>
+
+<div class="controls">
+<button onclick="decrease(${index})">-</button>
+<span>${item.quantity}</span>
+<button onclick="increase(${index})">+</button>
+</div>
+
+<div class="remove" onclick="removeItem(${index})">Remove</div>
+
+</div>
+`;
+});
+
+let delivery = 40;
+let total = subtotal + delivery;
+
+let warningMessage = "";
+if(totalCalories > 2000){
+warningMessage = `<div class="warning">
+⚠ This order exceeds recommended daily calorie intake (2000 kcal)
+</div>`;
+}
+
+summary.innerHTML = `
+<h3>Order Summary</h3>
+<p>Subtotal: ₹${subtotal}</p>
+<p>Delivery: ₹${delivery}</p>
+<hr style="margin:10px 0;">
+<p><strong>Total Calories: 🔥 ${totalCalories} kcal</strong></p>
+<h3>Total: ₹${total}</h3>
+${warningMessage}
+<button class="checkout-btn" onclick="goCheckout(${total},${totalCalories})">
+Proceed to Checkout
+</button>
+`;
+}
+
+function increase(i){
+cart[i].quantity++;
+update();
+}
+
+function decrease(i){
+if(cart[i].quantity > 1){
+cart[i].quantity--;
+}else{
+cart.splice(i,1);
+}
+update();
+}
+
+function removeItem(i){
+cart.splice(i,1);
+update();
+}
+
+function update(){
+localStorage.setItem("cart", JSON.stringify(cart));
+renderCart();
+}
+
+function goCheckout(total, calories){
+localStorage.setItem("totalAmount", total);
+localStorage.setItem("totalCalories", calories);
+window.location.href="checkout.html";
+}
+
+renderCart();
+</script>
+
+</body>
+</html>

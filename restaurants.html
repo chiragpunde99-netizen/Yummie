@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yummie - Restaurants</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f2f2f2;
+}
+
+/* NAVBAR */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 80px;
+background:#ff5a00;
+color:white;
+}
+
+.logo{
+font-size:30px;
+font-weight:800;
+}
+
+.nav-links{
+display:flex;
+gap:20px;
+align-items:center;
+}
+
+.btn-dark{
+background:black;
+padding:8px 16px;
+border-radius:8px;
+cursor:pointer;
+}
+
+/* WELCOME */
+
+.welcome{
+padding:50px 80px 20px;
+}
+
+/* CATEGORIES */
+
+.categories{
+padding:30px 80px;
+}
+
+.category-grid{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:30px;
+text-align:center;
+}
+
+.category img{
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+box-shadow:0 8px 20px rgba(0,0,0,0.12);
+}
+
+.category p{
+margin-top:10px;
+font-weight:500;
+}
+
+/* RESTAURANTS */
+
+.restaurants{
+padding:40px 80px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:30px;
+}
+
+.card{
+background:#fff;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.card-content{
+padding:12px;
+}
+
+.rating{
+color:green;
+font-weight:600;
+font-size:14px;
+}
+
+.time{
+color:#777;
+font-size:14px;
+margin-left:8px;
+}
+
+.card-link{
+text-decoration:none;
+color:inherit;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+<div class="logo">Yummie</div>
+
+<div class="nav-links">
+<span id="navUser"></span>
+<a href="index.html" style="color:white;">Home</a>
+<a href="cart.html" style="color:white;">Cart</a>
+<a href="help.html" style="color:white;">Help</a>
+<span onclick="logout()" class="btn-dark">Logout</span>
+</div>
+</div>
+
+<!-- WELCOME -->
+
+<div class="welcome">
+<h2 id="welcomeText"></h2>
+</div>
+
+<!-- CATEGORIES -->
+
+<div class="categories">
+
+<div class="category-grid">
+
+<div class="category"><img src="biryni.jpeg"><p>Biryani</p></div>
+<div class="category"><img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb"><p>Icecream</p></div>
+<div class="category"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349"><p>Burgers</p></div>
+<div class="category"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587"><p>Cakes</p></div>
+<div class="category"><img src="piz.jpeg"><p>Pizzas</p></div>
+<div class="category"><img src="https://images.unsplash.com/photo-1585032226651-759b368d7246"><p>Noodles</p></div>
+<div class="category"><img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af"><p>Sandwich</p></div>
+
+<div class="category"><img src="fries.jpeg"><p>Fries</p></div>
+<div class="category"><img src="roll.jpeg"><p>Rolls</p></div>
+<div class="category"><img src="si.jpeg"><p>SouthIndian</p></div>
+<div class="category"><img src="momos.jpeg"><p>Momos</p></div>
+<div class="category"><img src="thali.jpeg"><p>Thali</p></div>
+<div class="category"><img src="Healthy.jpeg"><p>Healthy</p></div>
+<div class="category"><img src="https://images.unsplash.com/photo-1551024601-bec78aea704b"><p>Desserts</p></div>
+
+</div>
+</div>
+
+<!-- RESTAURANTS -->
+
+<div class="restaurants">
+
+<div class="cards">
+
+<!-- ROW 1 -->
+
+<a href="nourishing.html" class="card-link">
+<div class="card">
+<img src="nf.jpeg">
+<div class="card-content">
+<h3>Nourishing Farms</h3>
+<span class="rating">★ 4.3</span>
+<span class="time">30-40 mins</span>
+</div>
+</div>
+</a>
+
+<a href="elaya.html" class="card-link">
+<div class="card">
+<img src="elaya.jpeg">
+<div class="card-content">
+<h3>Elaya</h3>
+<span class="rating">★ 4.1</span>
+<span class="time">25-35 mins</span>
+</div>
+</div>
+</a>
+
+<a href="nutrifit.html" class="card-link">
+<div class="card">
+<img src="nutrifit.jpeg">
+<div class="card-content">
+<h3>Nutrifit Diet Cafe</h3>
+<span class="rating">★ 4.5</span>
+<span class="time">20-30 mins</span>
+</div>
+</div>
+</a>
+
+<a href="hp.html" class="card-link">
+<div class="card">
+<img src="hp.jpeg">
+<div class="card-content">
+<h3>Healthy Planet</h3>
+<span class="rating">★ 4.0</span>
+<span class="time">20-25 mins</span>
+</div>
+</div>
+</a>
+
+<a href="starbucks.html" class="card-link">
+<div class="card">
+<img src="sb.jpeg">
+<div class="card-content">
+<h3>Starbucks</h3>
+<span class="rating">★ 4.2</span>
+<span class="time">20-30 mins</span>
+</div>
+</div>
+</a>
+<!-- ROW 2 -->
+
+<a href="burger.html" class="card-link">
+<div class="card">
+<img src="bk.jpeg">
+<div class="card-content">
+<h3>Burger King</h3>
+<span class="rating">★ 4.4</span>
+<span class="time">30-35 mins</span>
+</div>
+</div>
+</a>
+
+<a href="mcd.html" class="card-link">
+<div class="card">
+<img src="mcd.jpeg">
+<div class="card-content">
+<h3>McDonald's</h3>
+<span class="rating">★ 4.5</span>
+<span class="time">25-30 mins</span>
+</div>
+</div>
+</a>
+
+<a href="dominos.html" class="card-link">
+<div class="card">
+<img src="dom.jpeg">
+<div class="card-content">
+<h3>Domino's Pizza</h3>
+<span class="rating">★ 4.2</span>
+<span class="time">35-40 mins</span>
+</div>
+</div>
+</a>
+
+<a href="subway.html" class="card-link">
+<div class="card">
+<img src="sub.jpeg">
+<div class="card-content">
+<h3>Subway</h3>
+<span class="rating">★ 4.6</span>
+<span class="time">20-25 mins</span>
+</div>
+</div>
+</a>
+
+<a href="kfc.html" class="card-link">
+<div class="card">
+<img src="kfc.jpeg">
+<div class="card-content">
+<h3>KFC</h3>
+<span class="rating">★ 4.3</span>
+<span class="time">25-30 mins</span>
+</div>
+</div>
+</a>
+
+
+
+</div>
+</div>
+
+<script>
+
+let user = localStorage.getItem("yummieUser");
+
+if(user){
+document.getElementById("welcomeText").innerText =
+user + ", what's on your mind?";
+document.getElementById("navUser").innerText="👋 "+user;
+}
+
+function logout(){
+localStorage.removeItem("yummieUser");
+window.location.href="index.html";
+}
+
+</script>
+
+</body>
+</html>

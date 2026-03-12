@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yummie - Offers</title>
+    <style>
+        body {
+            font-family: Poppins, sans-serif;
+            margin: 0;
+            background: #f5f5f5;
+        }
+
+        /* 🔥 Top Banner */
+        .offer-banner {
+            background: linear-gradient(135deg, #ff5a00, #ff8c42);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .offer-banner h1 {
+            margin: 0;
+            font-size: 40px;
+        }
+
+        .offer-banner p {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        /* 🔥 Offer Cards */
+        .offer-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            padding: 50px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .offer-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .offer-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .offer-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .offer-content {
+            padding: 20px;
+        }
+
+        .discount {
+            background: #ff5a00;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .coupon {
+            background: #f2f2f2;
+            padding: 8px;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .btn {
+            display: block;
+            background: #ff5a00;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 15px;
+        }
+
+        .btn:hover {
+            background: #e14e00;
+        }
+
+        /* 📱 Responsive */
+        @media(max-width: 900px){
+            .offer-container{
+                grid-template-columns: repeat(2,1fr);
+            }
+        }
+
+        @media(max-width: 600px){
+            .offer-container{
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- 🔥 Banner -->
+    <div class="offer-banner">
+        <h1>🔥 Yummie Special Offers</h1>
+        <p>Grab the best deals on your favorite food!</p>
+    </div>
+
+    <!-- 🔥 Offer Cards -->
+    <div class="offer-container">
+
+        <div class="offer-card">
+            <img src="https://images.unsplash.com/photo-1548365328-9f547fb0953a" alt="Pizza Offer">
+            <div class="offer-content">
+                <div class="discount">50% OFF</div>
+                <h3>Flat 50% Off on Pizzas</h3>
+                <p>Order above ₹299 and enjoy massive discount.</p>
+                <div class="coupon">Use Code: YUM50</div>
+                <a href="#" class="btn">Order Now</a>
+            </div>
+        </div>
+
+        <div class="offer-card">
+            <img src="https://images.unsplash.com/photo-1550547660-d9450f859349" alt="Burger Offer">
+            <div class="offer-content">
+                <div class="discount">Buy 1 Get 1</div>
+                <h3>Burger Bonanza</h3>
+                <p>Buy 1 burger & get 1 absolutely FREE!</p>
+                <div class="coupon">Use Code: BOGO</div>
+                <a href="#" class="btn">Order Now</a>
+            </div>
+        </div>
+
+        <div class="offer-card">
+            <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d" alt="Biryani Offer">
+            <div class="offer-content">
+                <div class="discount">30% OFF</div>
+                <h3>Weekend Biryani Deal</h3>
+                <p>Flat 30% off on all biryani orders.</p>
+                <div class="coupon">Use Code: BIRYANI30</div>
+                <a href="#" class="btn">Order Now</a>
+            </div>
+        </div>
+
+        <div class="offer-card">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587" alt="Cake Offer">
+            <div class="offer-content">
+                <div class="discount">25% OFF</div>
+                <h3>Cake Celebration Offer</h3>
+                <p>Celebrate with sweet discounts on cakes.</p>
+                <div class="coupon">Use Code: CAKE25</div>
+                <a href="#" class="btn">Order Now</a>
+            </div>
+        </div>
+
+        <div class="offer-card">
+            <img src="https://images.unsplash.com/photo-1505253213348-cd54c5f2e6b3" alt="Ice Cream Offer">
+            <div class="offer-content">
+                <div class="discount">20% OFF</div>
+                <h3>Ice Cream Special</h3>
+                <p>Cool down with 20% discount.</p>
+                <div class="coupon">Use Code: COOL20</div>
+                <a href="#" class="btn">Order Now</a>
+            </div>
+        </div>
+
+        <div class="offer-card">
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c" alt="Healthy Offer">
+            <div class="offer-content">
+                <div class="discount">15% OFF</div>
+                <h3>Healthy Meal Deal</h3>
+                <p>Flat 15% off on healthy foods.</p>
+                <div class="coupon">Use Code: FIT15</div>
+                <a href="#" class="btn">Order Now</a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

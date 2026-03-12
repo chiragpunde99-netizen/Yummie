@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Restaurants</title>
+    <style>
+        body {
+            font-family: Poppins, sans-serif;
+            padding: 40px;
+            background: #f2f2f2;
+        }
+
+        h1 {
+            color: #ff5a00;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        /* ✅ 3 cards per row */
+        .restaurant-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .restaurant-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .restaurant-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .restaurant-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .restaurant-info {
+            padding: 15px;
+        }
+
+        .restaurant-info h3 {
+            margin: 0 0 8px;
+        }
+
+        .rating {
+            color: green;
+            font-weight: bold;
+        }
+
+        .details {
+            font-size: 14px;
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 id="categoryTitle"></h1>
+    <div class="restaurant-container" id="restaurants"></div>
+
+    <script>
+        let params = new URLSearchParams(window.location.search);
+        let category = params.get("name");
+
+        document.getElementById("categoryTitle").innerText =
+            "Best " + category + " Restaurants Near You";
+
+        /* ✅ Fixed Stable Restaurant Images */
+        const data = {
+
+            biryani: [
+                { name: "Biryani Blues", rating: "4.5 ⭐", time: "30 mins", price: "₹300 for two", image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d" },
+                { name: "Behrouz Biryani", rating: "4.4 ⭐", time: "35 mins", price: "₹350 for two", image: "https://images.unsplash.com/photo-1633945274405-b6c8069047b9" },
+                { name: "Paradise Biryani", rating: "4.6 ⭐", time: "40 mins", price: "₹400 for two", image: "https://images.unsplash.com/photo-1599043513900-ed6fe01d3833" },
+                { name: "Biryani By Kilo", rating: "4.3 ⭐", time: "28 mins", price: "₹320 for two", image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0" },
+                { name: "Zam Zam", rating: "4.1 ⭐", time: "25 mins", price: "₹250 for two", image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b" },
+                { name: "Bikkgane Biryani", rating: "4.2 ⭐", time: "30 mins", price: "₹280 for two", image: "https://images.unsplash.com/photo-1563379091339-03246963d96c" }
+            ],
+
+            icecream: [
+                { name: "Baskin Robbins", rating: "4.5 ⭐", time: "20 mins", price: "₹200 for two", image: "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f" },
+                { name: "Naturals", rating: "4.6 ⭐", time: "18 mins", price: "₹220 for two", image: "https://images.unsplash.com/photo-1505253213348-cd54c5f2e6b3" },
+                { name: "Cream Stone", rating: "4.3 ⭐", time: "22 mins", price: "₹250 for two", image: "https://images.unsplash.com/photo-1570197571499-166b36435e9f" },
+                { name: "Ibaco", rating: "4.4 ⭐", time: "21 mins", price: "₹240 for two", image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb" },
+                { name: "Havmor", rating: "4.2 ⭐", time: "19 mins", price: "₹170 for two", image: "https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81" },
+                { name: "Giani's", rating: "4.3 ⭐", time: "17 mins", price: "₹160 for two", image: "https://images.unsplash.com/photo-1488900128323-21503983a07e" }
+            ],
+
+            burgers: [
+                { name: "McDonald's", rating: "4.3 ⭐", time: "20 mins", price: "₹150 for two", image: "https://images.unsplash.com/photo-1550547660-d9450f859349" },
+                { name: "Burger King", rating: "4.2 ⭐", time: "25 mins", price: "₹200 for two", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd" },
+                { name: "KFC", rating: "4.1 ⭐", time: "30 mins", price: "₹250 for two", image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec" },
+                { name: "Wendy's", rating: "4.0 ⭐", time: "22 mins", price: "₹220 for two", image: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5" },
+                { name: "Smash Burger", rating: "4.4 ⭐", time: "28 mins", price: "₹300 for two", image: "https://images.unsplash.com/photo-1571091718767-18b5b1457add" },
+                { name: "Biggies Burger", rating: "4.3 ⭐", time: "26 mins", price: "₹180 for two", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90" }
+            ],
+
+            cakes: [
+                { name: "Theobroma", rating: "4.6 ⭐", time: "20 mins", price: "₹400 for two", image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587" },
+                { name: "CakeZone", rating: "4.4 ⭐", time: "22 mins", price: "₹350 for two", image: "https://images.unsplash.com/photo-1551024601-bec78aea704b" },
+                { name: "Winni Cakes", rating: "4.2 ⭐", time: "18 mins", price: "₹300 for two", image: "https://images.unsplash.com/photo-1603532648955-039310d9ed75" },
+                { name: "Monginis", rating: "4.3 ⭐", time: "15 mins", price: "₹200 for two", image: "https://images.unsplash.com/photo-1587241321921-91a834d6d191" },
+                { name: "Sweet Truth", rating: "4.5 ⭐", time: "19 mins", price: "₹280 for two", image: "https://images.unsplash.com/photo-1535141192574-5d4897c12636" },
+                { name: "Bake House", rating: "4.1 ⭐", time: "16 mins", price: "₹250 for two", image: "https://images.unsplash.com/photo-1542826438-bd32f43d626f" }
+            ],
+
+            pizzas: [
+                { name: "Domino's Pizza", rating: "4.2 ⭐", time: "30 mins", price: "₹200 for two", image: "https://images.unsplash.com/photo-1548365328-9f547fb0953a" },
+                { name: "Pizza Hut", rating: "4.1 ⭐", time: "25 mins", price: "₹250 for two", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591" },
+                { name: "La Pino'z", rating: "4.3 ⭐", time: "20 mins", price: "₹180 for two", image: "https://images.unsplash.com/photo-1601924582975-7e7b1c43f6b5" },
+                { name: "Oven Story", rating: "4.4 ⭐", time: "35 mins", price: "₹300 for two", image: "https://images.unsplash.com/photo-1594007654729-407eedc4fe0f" },
+                { name: "Chicago Pizza", rating: "4.0 ⭐", time: "30 mins", price: "₹220 for two", image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002" },
+                { name: "Italiano", rating: "4.5 ⭐", time: "28 mins", price: "₹270 for two", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38" }
+            ],
+
+            noodles: [
+                { name: "Wow China", rating: "4.2 ⭐", time: "25 mins", price: "₹220 for two", image: "https://images.unsplash.com/photo-1585032226651-759b368d7246" },
+                { name: "Chowman", rating: "4.1 ⭐", time: "30 mins", price: "₹300 for two", image: "https://images.unsplash.com/photo-1555126634-323283e090fa" },
+                { name: "Wok Express", rating: "4.3 ⭐", time: "28 mins", price: "₹250 for two", image: "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841" },
+                { name: "Dragon Bowl", rating: "4.5 ⭐", time: "27 mins", price: "₹350 for two", image: "https://images.unsplash.com/photo-1604908177522-040f4f5e3d23" },
+                { name: "Mainland China", rating: "4.4 ⭐", time: "35 mins", price: "₹400 for two", image: "https://images.unsplash.com/photo-1562967916-eb82221dfb36" },
+                { name: "China Town", rating: "4.0 ⭐", time: "32 mins", price: "₹280 for two", image: "https://images.unsplash.com/photo-1605478033097-1f1c0d6b7a3e" }
+            ],
+
+            sandwich: [
+                { name: "Subway", rating: "4.3 ⭐", time: "20 mins", price: "₹250 for two", image: "https://images.unsplash.com/photo-1553909489-cd47e0ef937f" },
+                { name: "Panini House", rating: "4.2 ⭐", time: "18 mins", price: "₹200 for two", image: "https://images.unsplash.com/photo-1567234669003-dce7a7a88821" },
+                { name: "Cafe Sub", rating: "4.1 ⭐", time: "22 mins", price: "₹220 for two", image: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d" },
+                { name: "Sandwich Hub", rating: "4.4 ⭐", time: "25 mins", price: "₹300 for two", image: "https://images.unsplash.com/photo-1585238342024-78d387f4a707" },
+                { name: "Quick Bites", rating: "4.0 ⭐", time: "19 mins", price: "₹240 for two", image: "https://images.unsplash.com/photo-1604908177521-472c3a1a4b2c" },
+                { name: "Toast Factory", rating: "4.3 ⭐", time: "21 mins", price: "₹210 for two", image: "https://images.unsplash.com/photo-1528731708534-816fe59f90cb" }
+            ],
+
+            fries: [
+                { name: "Belgian Fries", rating: "4.3 ⭐", time: "15 mins", price: "₹150 for two", image: "https://images.unsplash.com/photo-1576107232684-1279f390859f" },
+                { name: "Fries Corner", rating: "4.1 ⭐", time: "18 mins", price: "₹120 for two", image: "https://images.unsplash.com/photo-1585238342024-78d387f4a707" },
+                { name: "Snack Shack", rating: "4.4 ⭐", time: "17 mins", price: "₹140 for two", image: "https://images.unsplash.com/photo-1562967916-eb82221dfb36" },
+                { name: "Crunchy Fries", rating: "4.2 ⭐", time: "19 mins", price: "₹150 for two", image: "https://images.unsplash.com/photo-1550547660-d9450f859349" },
+                { name: "Loaded Fries Hub", rating: "4.0 ⭐", time: "16 mins", price: "₹130 for two", image: "https://images.unsplash.com/photo-1604908177521-472c3a1a4b2c" },
+                { name: "Potato King", rating: "4.3 ⭐", time: "20 mins", price: "₹160 for two", image: "https://images.unsplash.com/photo-1585238342024-78d387f4a707" }
+            ],
+
+            rolls: [
+                { name: "Rolls King", rating: "4.2 ⭐", time: "22 mins", price: "₹180 for two", image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d" },
+                { name: "Wrap House", rating: "4.3 ⭐", time: "23 mins", price: "₹210 for two", image: "https://images.unsplash.com/photo-1604908177521-472c3a1a4b2c" },
+                { name: "Frankie Junction", rating: "4.0 ⭐", time: "18 mins", price: "₹160 for two", image: "https://images.unsplash.com/photo-1585032226651-759b368d7246" },
+                { name: "Kolkata Rolls", rating: "4.4 ⭐", time: "25 mins", price: "₹200 for two", image: "https://images.unsplash.com/photo-1555126634-323283e090fa" },
+                { name: "Roll Express", rating: "4.2 ⭐", time: "21 mins", price: "₹190 for two", image: "https://images.unsplash.com/photo-1605478033097-1f1c0d6b7a3e" },
+                { name: "The Roll Factory", rating: "4.1 ⭐", time: "20 mins", price: "₹170 for two", image: "https://images.unsplash.com/photo-1562967916-eb82221dfb36" }
+            ],
+
+            southindian: [
+                { name: "Saravana Bhavan", rating: "4.5 ⭐", time: "30 mins", price: "₹250 for two", image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc" },
+                { name: "A2B", rating: "4.3 ⭐", time: "20 mins", price: "₹200 for two", image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d" },
+                { name: "Udupi Palace", rating: "4.2 ⭐", time: "25 mins", price: "₹180 for two", image: "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841" },
+                { name: "Dosa Plaza", rating: "4.1 ⭐", time: "22 mins", price: "₹220 for two", image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc" },
+                { name: "Madras Cafe", rating: "4.4 ⭐", time: "28 mins", price: "₹230 for two", image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc" },
+                { name: "Sagar Ratna", rating: "4.3 ⭐", time: "24 mins", price: "₹260 for two", image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc" }
+            ],
+
+            momos: [
+                { name: "Wow Momo", rating: "4.3 ⭐", time: "20 mins", price: "₹200 for two", image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d" },
+                { name: "Momo Nation", rating: "4.2 ⭐", time: "22 mins", price: "₹180 for two", image: "https://images.unsplash.com/photo-1585032226651-759b368d7246" },
+                { name: "Momo King", rating: "4.1 ⭐", time: "25 mins", price: "₹220 for two", image: "https://images.unsplash.com/photo-1555126634-323283e090fa" },
+                { name: "Tibetan Bowl", rating: "4.4 ⭐", time: "28 mins", price: "₹250 for two", image: "https://images.unsplash.com/photo-1605478033097-1f1c0d6b7a3e" },
+                { name: "Momo Street", rating: "4.0 ⭐", time: "18 mins", price: "₹160 for two", image: "https://images.unsplash.com/photo-1562967916-eb82221dfb36" },
+                { name: "Himalayan Momo", rating: "4.3 ⭐", time: "21 mins", price: "₹190 for two", image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc" }
+            ],
+
+            thali: [
+                { name: "Rajdhani", rating: "4.5 ⭐", time: "40 mins", price: "₹500 for two", image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d" },
+                { name: "Maharaja Thali", rating: "4.4 ⭐", time: "38 mins", price: "₹450 for two", image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc" },
+                { name: "Thali Junction", rating: "4.2 ⭐", time: "32 mins", price: "₹380 for two", image: "https://images.unsplash.com/photo-1562967916-eb82221dfb36" },
+                { name: "Royal Bhojan", rating: "4.1 ⭐", time: "30 mins", price: "₹350 for two", image: "https://images.unsplash.com/photo-1585032226651-759b368d7246" },
+                { name: "Desi Thali", rating: "4.3 ⭐", time: "34 mins", price: "₹420 for two", image: "https://images.unsplash.com/photo-1555126634-323283e090fa" },
+                { name: "Gujarat Thali House", rating: "4.3 ⭐", time: "35 mins", price: "₹400 for two", image: "https://images.unsplash.com/photo-1605478033097-1f1c0d6b7a3e" }
+            ],
+
+            healthy: [
+                { name: "Green Bowl", rating: "4.3 ⭐", time: "20 mins", price: "₹300 for two", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c" },
+                { name: "Healthify", rating: "4.2 ⭐", time: "22 mins", price: "₹280 for two", image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061" },
+                { name: "Protein House", rating: "4.4 ⭐", time: "25 mins", price: "₹350 for two", image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836" },
+                { name: "Nature's Kitchen", rating: "4.1 ⭐", time: "24 mins", price: "₹320 for two", image: "https://images.unsplash.com/photo-1478145046317-39f10e56b5e9" },
+                { name: "Fit Meals", rating: "4.5 ⭐", time: "26 mins", price: "₹370 for two", image: "https://images.unsplash.com/photo-1505253213348-cd54c5f2e6b3" },
+                { name: "Healthy Bites", rating: "4.2 ⭐", time: "21 mins", price: "₹290 for two", image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352" }
+            ],
+
+            desserts: [
+                { name: "Sweet Truth", rating: "4.4 ⭐", time: "20 mins", price: "₹250 for two", image: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e" },
+                { name: "The Belgian Waffle", rating: "4.3 ⭐", time: "22 mins", price: "₹200 for two", image: "https://images.unsplash.com/photo-1505253716362-afaea1d3d1af" },
+                { name: "Keventers", rating: "4.1 ⭐", time: "18 mins", price: "₹180 for two", image: "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f" },
+                { name: "Havmor", rating: "4.3 ⭐", time: "19 mins", price: "₹170 for two", image: "https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81" },
+                { name: "Baskin Robbins", rating: "4.5 ⭐", time: "20 mins", price: "₹220 for two", image: "https://images.unsplash.com/photo-1488900128323-21503983a07e" },
+                { name: "Giani's", rating: "4.2 ⭐", time: "17 mins", price: "₹160 for two", image: "https://images.unsplash.com/photo-1570197571499-166b36435e9f" }
+            ]
+
+        };
+
+        let restaurants = data[category?.toLowerCase()] || [];
+        let container = document.getElementById("restaurants");
+
+        if (restaurants.length === 0) {
+            container.innerHTML = "<p style='text-align:center;'>No restaurants found.</p>";
+        } else {
+            restaurants.slice(0, 6).forEach(r => {
+                container.innerHTML += `
+                <div class="restaurant-card">
+                    <img src="${r.image}" alt="${r.name}">
+                    <div class="restaurant-info">
+                        <h3>${r.name}</h3>
+                        <div class="rating">${r.rating}</div>
+                        <div class="details">${r.time} • ${r.price}</div>
+                    </div>
+                </div>
+            `;
+            });
+        }
+    </script>
+
+</body>
+
+</html>
