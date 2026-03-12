@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Yummie - Nutrition & Health</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f88547;
+}
+
+/* Navbar */
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 80px;
+    background:#ff5a00;
+    color:white;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:800;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:500;
+}
+
+.nav-links a:hover{
+    color:black;
+}
+
+/* Header */
+.header{
+    text-align:center;
+    padding:60px 20px 40px;
+    color:white;
+}
+
+.header h1{
+    font-size:42px;
+}
+
+/* Main Container */
+.container{
+    padding:40px 80px 80px;
+}
+
+/* Card Grid */
+.grid{
+    display:flex;
+    gap:60px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+/* Cards */
+.card{
+    background:white;
+    width:450px;
+    padding:45px;
+    border-radius:25px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.2);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+.card h2{
+    margin-bottom:20px;
+    color:#ff5a00;
+    font-size:24px;
+}
+
+.card input, .card select{
+    width:100%;
+    padding:12px;
+    margin:10px 0 18px;
+    border-radius:10px;
+    border:1px solid #ddd;
+    font-size:14px;
+}
+
+.card input:focus,
+.card select:focus{
+    border-color:#ff5a00;
+}
+
+.card button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#ff5a00;
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.card button:hover{
+    background:black;
+}
+
+.result{
+    margin-top:15px;
+    font-weight:600;
+    font-size:16px;
+}
+
+/* Table Section */
+.table-card{
+    margin:80px auto 0 auto;
+    background:white;
+    padding:40px;
+    border-radius:25px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.2);
+    max-width:1100px;
+}
+
+.table-card h3{
+    margin-bottom:25px;
+    color:#ff5a00;
+    font-size:24px;
+    text-align:left;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    text-align:center;
+}
+
+th, td{
+    padding:16px;
+    border-bottom:1px solid #eee;
+}
+
+th{
+    background:#ffe5d4;
+    font-weight:600;
+}
+
+tr:hover{
+    background:#fff5ee;
+}
+
+/* Footer */
+footer{
+    background:black;
+    color:white;
+    padding:20px 0;
+    margin-top:60px;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Responsive */
+@media(max-width:768px){
+    .navbar{
+        flex-direction:column;
+        padding:20px;
+    }
+    .container{
+        padding:20px;
+    }
+    .card{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div class="logo">Yummie</div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="restaurants.html">Restaurants</a>
+        <a href="offer.html">Offers</a>
+        <a href="cart.html">Cart</a>
+    </div>
+</div>
+
+<!-- Header -->
+<div class="header">
+    <h1>🥗 Nutrition & Health Analysis</h1>
+</div>
+
+<div class="container">
+
+<div class="grid">
+
+<!-- BMI -->
+<div class="card">
+    <h2>BMI Calculator</h2>
+    <input type="number" id="height" placeholder="Height (cm)">
+    <input type="number" id="weight" placeholder="Weight (kg)">
+    <button onclick="calculateBMI()">Calculate BMI</button>
+    <p id="bmiResult" class="result"></p>
+</div>
+
+<!-- Calories -->
+<div class="card">
+    <h2>Daily Calorie Needs</h2>
+    <input type="number" id="age" placeholder="Age">
+    <select id="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+    </select>
+    <button onclick="calculateCalories()">Calculate</button>
+    <p id="calorieResult" class="result"></p>
+</div>
+
+</div>
+
+<!-- Nutrition Table -->
+<div class="table-card">
+    <h3>Popular Food Nutrition Chart</h3>
+    <table>
+        <tr>
+            <th>Food</th>
+            <th>Calories</th>
+            <th>Protein</th>
+            <th>Carbs</th>
+            <th>Fat</th>
+        </tr>
+        <tr><td>Burger</td><td>295 kcal</td><td>17g</td><td>30g</td><td>12g</td></tr>
+        <tr><td>Pizza (1 slice)</td><td>285 kcal</td><td>12g</td><td>36g</td><td>10g</td></tr>
+        <tr><td>Healthy Bowl</td><td>220 kcal</td><td>14g</td><td>28g</td><td>6g</td></tr>
+        <tr><td>Grilled Chicken (100g)</td><td>165 kcal</td><td>31g</td><td>0g</td><td>3.6g</td></tr>
+        <tr><td>Paneer (100g)</td><td>265 kcal</td><td>18g</td><td>6g</td><td>20g</td></tr>
+        <tr><td>Rice (1 cup)</td><td>205 kcal</td><td>4g</td><td>45g</td><td>0.4g</td></tr>
+        <tr><td>Chapati (1 piece)</td><td>120 kcal</td><td>3g</td><td>20g</td><td>3g</td></tr>
+        <tr><td>Egg (1 whole)</td><td>78 kcal</td><td>6g</td><td>0.6g</td><td>5g</td></tr>
+        <tr><td>Salad Bowl</td><td>150 kcal</td><td>5g</td><td>20g</td><td>4g</td></tr>
+        <tr><td>French Fries (Medium)</td><td>365 kcal</td><td>4g</td><td>48g</td><td>17g</td></tr>
+        <tr><td>Chocolate Cake (Slice)</td><td>350 kcal</td><td>4g</td><td>50g</td><td>15g</td></tr>
+        <tr><td>Protein Shake</td><td>180 kcal</td><td>25g</td><td>8g</td><td>3g</td></tr>
+    </table>
+</div>
+
+</div>
+
+<footer>
+© 2026 Yummie. All rights reserved.
+</footer>
+
+<script>
+function calculateBMI(){
+    let height = document.getElementById("height").value;
+    let weight = document.getElementById("weight").value;
+
+    if(!height || !weight){
+        document.getElementById("bmiResult").innerText = "Please enter valid values.";
+        return;
+    }
+
+    height = height / 100;
+    let bmi = (weight / (height * height)).toFixed(2);
+
+    let status = "";
+    if(bmi < 18.5) status = "Underweight";
+    else if(bmi < 24.9) status = "Normal weight";
+    else if(bmi < 29.9) status = "Overweight";
+    else status = "Obese";
+
+    document.getElementById("bmiResult").innerText =
+        "Your BMI is " + bmi + " (" + status + ")";
+}
+
+function calculateCalories(){
+    let age = document.getElementById("age").value;
+    let gender = document.getElementById("gender").value;
+
+    if(!age){
+        document.getElementById("calorieResult").innerText = "Please enter age.";
+        return;
+    }
+
+    let bmr;
+
+    if(gender === "male"){
+        bmr = 88.36 + (13.4 * 70) + (4.8 * 170) - (5.7 * age);
+    }else{
+        bmr = 447.6 + (9.2 * 60) + (3.1 * 160) - (4.3 * age);
+    }
+
+    let calories = Math.round(bmr);
+
+    document.getElementById("calorieResult").innerText =
+        "Estimated Daily Calories: " + calories + " kcal";
+}
+</script>
+
+</body>
+</html>

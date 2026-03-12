@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Checkout - Yummie</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f2f2f2;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+background:white;
+padding:40px;
+border-radius:15px;
+box-shadow:0 15px 35px rgba(0,0,0,0.1);
+width:420px;
+text-align:center;
+}
+
+.amount{
+font-size:22px;
+font-weight:700;
+margin:10px 0;
+}
+
+.calories{
+margin-bottom:15px;
+font-size:14px;
+}
+
+button{
+background:#ff5a00;
+border:none;
+padding:12px;
+width:100%;
+color:white;
+border-radius:8px;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:black;
+}
+
+.loader{
+display:none;
+margin-top:15px;
+font-size:14px;
+}
+
+.success{
+display:none;
+margin-top:15px;
+color:green;
+font-weight:600;
+}
+
+/* TRACKING */
+.tracking{
+display:none;
+margin-top:25px;
+text-align:left;
+}
+
+.step{
+display:flex;
+align-items:center;
+margin-bottom:15px;
+opacity:0.3;
+transition:0.5s;
+}
+
+.step.active{
+opacity:1;
+}
+
+.circle{
+width:25px;
+height:25px;
+border-radius:50%;
+background:#ccc;
+margin-right:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:12px;
+}
+
+.step.active .circle{
+background:#ff5a00;
+}
+
+.progress-bar{
+height:6px;
+background:#eee;
+border-radius:10px;
+overflow:hidden;
+margin:20px 0;
+}
+
+.progress{
+height:6px;
+width:0%;
+background:#ff5a00;
+transition:0.5s;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Secure Payment</h2>
+
+<div class="amount" id="amount"></div>
+<div class="calories" id="calories"></div>
+
+<button onclick="payNow()">Pay Now</button>
+
+<div class="loader" id="loader">Processing Payment...</div>
+<div class="success" id="successMsg">Payment Successful! 🎉</div>
+
+<div class="tracking" id="trackingSection">
+
+<div class="progress-bar">
+<div class="progress" id="progressBar"></div>
+</div>
+
+<div class="step" id="step1">
+<div class="circle">1</div>
+<span>Order Placed</span>
+</div>
+
+<div class="step" id="step2">
+<div class="circle">2</div>
+<span>Preparing Food</span>
+</div>
+
+<div class="step" id="step3">
+<div class="circle">3</div>
+<span>Out for Delivery 🚚</span>
+</div>
+
+<div class="step" id="step4">
+<div class="circle">4</div>
+<span>Delivered 🎉</span>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let total = localStorage.getItem("totalAmount") || 0;
+let calories = localStorage.getItem("totalCalories") || 0;
+
+document.getElementById("amount").innerText = "Total: ₹" + total;
+document.getElementById("calories").innerText = "🔥 " + calories + " kcal";
+
+function payNow(){
+
+document.getElementById("loader").style.display="block";
+
+setTimeout(()=>{
+document.getElementById("loader").style.display="none";
+document.getElementById("successMsg").style.display="block";
+document.getElementById("trackingSection").style.display="block";
+
+startTracking();
+
+},2000);
+}
+
+function startTracking(){
+
+let steps = ["step1","step2","step3","step4"];
+let progress = document.getElementById("progressBar");
+
+steps.forEach((step,index)=>{
+setTimeout(()=>{
+document.getElementById(step).classList.add("active");
+progress.style.width = ((index+1)/4)*100 + "%";
+}, index * 2000);
+});
+
+setTimeout(()=>{
+localStorage.removeItem("cart");
+}, 9000);
+
+setTimeout(()=>{
+window.location.href="restaurants.html";
+}, 11000);
+}
+
+</script>
+
+</body>
+</html>

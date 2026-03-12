@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Domino's Pizza - Yummie</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f2f2f2;
+}
+
+/* NAVBAR */
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 80px;
+background:#ff5a00;
+color:white;
+}
+
+.logo{
+font-size:28px;
+font-weight:800;
+}
+
+.nav-links{
+display:flex;
+gap:25px;
+align-items:center;
+}
+
+.nav-links a{
+color:white;
+text-decoration:none;
+font-weight:500;
+}
+
+.cart-link{
+position:relative;
+}
+
+.cart-badge{
+position:absolute;
+top:-8px;
+right:-14px;
+background:black;
+color:white;
+font-size:12px;
+padding:3px 7px;
+border-radius:50%;
+}
+
+/* PAGE */
+.container{
+padding:50px 80px;
+}
+
+.title{
+font-size:32px;
+margin-bottom:40px;
+}
+
+/* GRID */
+.food-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+}
+
+.food-card{
+background:white;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.food-card:hover{
+transform:translateY(-8px);
+}
+
+.food-card img{
+width:100%;
+height:300px;
+object-fit:cover;
+}
+
+.food-content{
+padding:15px;
+}
+
+.calories{
+font-size:13px;
+color:#888;
+margin-top:4px;
+}
+
+.price{
+margin:8px 0;
+font-weight:600;
+}
+
+.add-btn{
+background:#ff5a00;
+border:none;
+padding:10px;
+width:100%;
+border-radius:8px;
+color:white;
+font-weight:600;
+cursor:pointer;
+}
+
+.add-btn:hover{
+background:black;
+}
+
+@media(max-width:1000px){
+.food-grid{
+grid-template-columns:repeat(2,1fr);
+}
+}
+
+@media(max-width:768px){
+.navbar{
+flex-direction:column;
+padding:20px;
+gap:15px;
+}
+.container{
+padding:20px;
+}
+.food-grid{
+grid-template-columns:1fr;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+<div class="logo">Yummie</div>
+<div class="nav-links">
+<a href="restaurants.html">Restaurants</a>
+
+<a href="cart.html" class="cart-link">
+Cart 🛒
+<span id="cartCount" class="cart-badge">0</span>
+</a>
+
+<span id="navUser"></span>
+</div>
+</div>
+
+<div class="container">
+<div class="title">Domino's Pizza Menu 🍕</div>
+
+<div class="food-grid">
+
+<!-- 1 -->
+<div class="food-card">
+<img src="mp.jpeg">
+<div class="food-content">
+<h3>Margherita Pizza</h3>
+<div class="calories">🔥 1200 kcal</div>
+<div class="price">₹109</div>
+<button class="add-btn" onclick="addToCart('Margherita Pizza',109,'mp.jpeg',1200)">Add to Cart</button>
+</div>
+</div>
+
+<!-- 2 -->
+<div class="food-card">
+<img src="fp.jpeg">
+<div class="food-content">
+<h3>Farmhouse Pizza</h3>
+<div class="calories">🔥 280 kcal</div>
+<div class="price">₹269</div>
+<button class="add-btn" onclick="addToCart('Farmhouse Pizza',269,'fp.jpeg',280)">Add to Cart</button>
+</div>
+</div>
+
+<!-- 3 -->
+<div class="food-card">
+<img src="ppp.jpeg">
+<div class="food-content">
+<h3>Peppy Paneer Pizza</h3>
+<div class="calories">🔥 170 kcal</div>
+<div class="price">₹279</div>
+<button class="add-btn" onclick="addToCart('Peppy Paneer Pizza',279,'ppp.jpeg',170)">Add to Cart</button>
+</div>
+</div>
+
+<!-- 4 -->
+<div class="food-card">
+<img src="vep.jpeg">
+<div class="food-content">
+<h3>Veg Extravaganza Pizza</h3>
+<div class="calories">🔥 290 kcal</div>
+<div class="price">₹329</div>
+<button class="add-btn" onclick="addToCart('Veg Extravaganza Pizza',329,'vep.jpeg',290)">Add to Cart</button>
+</div>
+</div>
+
+<!-- 5 -->
+<div class="food-card">
+<img src="cdp.jpeg">
+<div class="food-content">
+<h3>Chicken Dominator Pizza</h3>
+<div class="calories">🔥 300 kcal</div>
+<div class="price">₹399</div>
+<button class="add-btn" onclick="addToCart('Chicken Dominator Pizza',399,'cdp.jpeg',300)">Add to Cart</button>
+</div>
+</div>
+
+<!-- 6 -->
+<div class="food-card">
+<img src="cpp.jpeg">
+<div class="food-content">
+<h3>Chicken Pepperoni Pizza</h3>
+<div class="calories">🔥 300 kcal</div>
+<div class="price">₹369</div>
+<button class="add-btn" onclick="addToCart('Chicken Pepperoni Pizza',369,'cpp.jpeg',300)">Add to Cart</button>
+</div>
+</div>
+
+<!-- 7 -->
+<div class="food-card">
+<img src="mcbp.jpeg">
+<div class="food-content">
+<h3>Margherita Cheese Burst Pizza</h3>
+<div class="calories">🔥 317 kcal</div>
+<div class="price">₹188</div>
+<button class="add-btn" onclick="addToCart('Cheese Burst Pizza',349,'mcbp.jpeg',1200)">Add to Cart</button>
+</div>
+</div>
+
+<!-- 8 -->
+<div class="food-card">
+<img src="gp.jpeg">
+<div class="food-content">
+<h3>Garlic Bread</h3>
+<div class="calories">🔥 350 kcal</div>
+<div class="price">₹179</div>
+<button class="add-btn" onclick="addToCart('Garlic Bread',179,'gp.jpeg',350)">Add to Cart</button>
+</div>
+</div>
+
+<!-- 9 -->
+<div class="food-card">
+<img src="clc.jpeg">
+<div class="food-content">
+<h3>Choco Lava Cake</h3>
+<div class="calories">🔥400 kcal</div>
+<div class="price">₹119</div>
+<button class="add-btn" onclick="addToCart('Choco Lava Cake',119,'clc.jpeg',400)">Add to Cart</button>
+</div>
+</div>
+
+</div>
+</div>
+
+<script>
+
+/* USER CHECK */
+let user = localStorage.getItem("yummieUser");
+if(user){
+document.getElementById("navUser").innerText = "👋 " + user;
+}else{
+window.location.href = "login.html";
+}
+
+/* CART BADGE */
+function updateCartCount(){
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let count = cart.reduce((total,item)=> total + item.quantity,0);
+let badge = document.getElementById("cartCount");
+badge.innerText = count;
+badge.style.display = count > 0 ? "inline-block" : "none";
+}
+
+document.addEventListener("DOMContentLoaded", updateCartCount);
+
+/* ADD TO CART */
+function addToCart(name, price, image, calories){
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let existing = cart.find(item => item.name === name);
+
+if(existing){
+existing.quantity += 1;
+}else{
+cart.push({
+name:name,
+price:price,
+image:image,
+calories:calories,
+quantity:1
+});
+}
+
+localStorage.setItem("cart", JSON.stringify(cart));
+updateCartCount();
+
+alert(name + " added to cart!");
+}
+
+</script>
+
+</body>
+</html>

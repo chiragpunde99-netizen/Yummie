@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Yummie - My Account</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f4f4f4;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #ff5a00;
+            padding: 18px 60px;
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        /* Layout */
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 40px auto;
+            gap: 30px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: white;
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .profile-top {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .avatar {
+            width: 90px;
+            height: 90px;
+            background: #ff5a00;
+            color: white;
+            font-size: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            font-weight: 600;
+        }
+
+        .profile-top h3 {
+            font-size: 18px;
+        }
+
+        .menu {
+            list-style: none;
+        }
+
+        .menu li {
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .menu li:hover,
+        .menu li.active {
+            background: #ffe5d4;
+            color: #ff5a00;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .content {
+            flex: 1;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #ff5a00;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background: #ff5a00;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #e14e00;
+        }
+
+        .order-card {
+            background: #f2f2f2;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .logout {
+            margin-top: 20px;
+            background: black;
+        }
+
+        @media(max-width:900px) {
+            .container {
+                flex-direction: column;
+                padding: 0 20px;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">Yummie - My Account</div>
+
+    <div class="container">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+
+            <div class="profile-top">
+                <div class="avatar" id="avatar"></div>
+                <h3 id="sidebarName"></h3>
+            </div>
+
+            <ul class="menu">
+                <li class="active" onclick="showSection('profile')">Profile</li>
+                <li onclick="showSection('orders')">My Orders</li>
+                <li onclick="showSection('address')">Saved Address</li>
+                <li onclick="showSection('password')">Change Password</li>
+            </ul>
+
+            <button class="logout" onclick="logout()">Logout</button>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+
+            <!-- Profile Section -->
+            <div id="profile" class="section active">
+                <h2>Profile Details</h2>
+                <input type="text" id="name">
+                <input type="email" id="email">
+                <input type="text" id="phone">
+                <button onclick="saveProfile()">Save Changes</button>
+            </div>
+
+            <!-- Orders Section -->
+            <div id="orders" class="section">
+                <h2>Order History</h2>
+
+                <div class="order-card">🍕 Domino's Pizza — ₹450 — Delivered</div>
+                <div class="order-card">🍔 Burger King — ₹320 — Delivered</div>
+                <div class="order-card">🍚 Biryani Blues — ₹550 — Delivered</div>
+
+            </div>
+
+            <!-- Address Section -->
+            <div id="address" class="section">
+                <h2>Saved Address</h2>
+                <input type="text" placeholder="Enter your address">
+                <button>Save Address</button>
+            </div>
+
+            <!-- Change Password Section -->
+            <div id="password" class="section">
+                <h2>Change Password</h2>
+                <input type="password" placeholder="Current Password">
+                <input type="password" placeholder="New Password">
+                <input type="password" placeholder="Confirm New Password">
+                <button>Update Password</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+        let user = localStorage.getItem("yummieUser");
+
+        if (!user) {
+            window.location.href = "login.html";
+        }
+
+        document.getElementById("avatar").innerText = user.charAt(0).toUpperCase();
+        document.getElementById("sidebarName").innerText = user;
+        document.getElementById("name").value = user;
+
+        // Dummy data
+        document.getElementById("email").value = user + "@gmail.com";
+        document.getElementById("phone").value = "9876543210";
+
+        function showSection(id) {
+            document.querySelectorAll(".menu li").forEach(li => li.classList.remove("active"));
+            event.target.classList.add("active");
+
+            document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
+            document.getElementById(id).classList.add("active");
+        }
+
+        function saveProfile() {
+            let newName = document.getElementById("name").value;
+            localStorage.setItem("yummieUser", newName);
+            alert("Profile Updated!");
+            location.reload();
+        }
+
+        function logout() {
+            localStorage.removeItem("yummieUser");
+            window.location.href = "index.html";
+        }
+
+    </script>
+
+</body>
+
+</html>

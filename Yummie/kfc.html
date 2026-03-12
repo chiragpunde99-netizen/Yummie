@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KFC - Yummie</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f2f2f2;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 80px;
+            background: #ff5a00;
+            color: white;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .cart-link {
+            position: relative;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -14px;
+            background: black;
+            color: white;
+            font-size: 12px;
+            padding: 3px 7px;
+            border-radius: 50%;
+        }
+
+        /* PAGE */
+        .container {
+            padding: 50px 80px;
+        }
+
+        .title {
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+
+        /* GRID */
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .food-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        .food-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .food-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .food-content {
+            padding: 15px;
+        }
+
+        .calories {
+            font-size: 13px;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        .price {
+            margin: 8px 0;
+            font-weight: 600;
+        }
+
+        .add-btn {
+            background: #ff5a00;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background: black;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:1000px) {
+            .food-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width:768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .food-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="logo">Yummie</div>
+        <div class="nav-links">
+            <a href="restaurants.html">Restaurants</a>
+
+            <a href="cart.html" class="cart-link">
+                Cart 🛒
+                <span id="cartCount" class="cart-badge">0</span>
+            </a>
+
+            <span id="navUser"></span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="title">KFC Menu 🍗</div>
+
+        <div class="food-grid">
+
+            <!-- 1 -->
+            <div class="food-card">
+                <img src="hcc.jpeg">
+                <div class="food-content">
+                    <h3>Hot & Crispy Chicken (2pc)</h3>
+                    <div class="calories">🔥 265 kcal</div>
+                    <div class="price">₹219</div>
+                    <button class="add-btn" onclick="addToCart('Hot & Crispy Chicken (2pc)',219,'hcc.jpeg',265)">Add to
+                        Cart</button>
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="food-card">
+                <img src="kfc2.jpeg">
+                <div class="food-content">
+                    <h3>Big 12 - Chicken Bucket</h3>
+                    <div class="calories">🔥 1500 kcal</div>
+                    <div class="price">₹998</div>
+                    <button class="add-btn" onclick="addToCart('Big 12 - Chicken Bucket',998,'kfc2.jpeg',1500)">Add to
+                        Cart</button>
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="food-card">
+                <img src="czb.jpeg">
+                <div class="food-content">
+                    <h3>Spicy Zinger Burger</h3>
+                    <div class="calories">🔥 450 kcal</div>
+                    <div class="price">₹229</div>
+                    <button class="add-btn" onclick="addToCart('Spicy Zinger Burger',229,'czb.jpeg',450)">Add to
+                        Cart</button>
+                </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="food-card">
+                <img src="cp.jpeg">
+                <div class="food-content">
+                    <h3>Chicken Popcorn (Large)</h3>
+                    <div class="calories">🔥 620 kcal</div>
+                    <div class="price">₹249</div>
+                    <button class="add-btn" onclick="addToCart('Chicken Popcorn (Large)',249,'cp.jpeg',620)">Add to
+                        Cart</button>
+                </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="food-card">
+                <img src="ge.jpeg">
+                <div class="food-content">
+                    <h3>Gold Edition Veg Zinger Burger</h3>
+                    <div class="calories">🔥 623 kcal</div>
+                    <div class="price">₹239</div>
+                    <button class="add-btn" onclick="addToCart('Gold Edition Veg Zinger Burger',239,'ge.jpeg',623)">Add
+                        to Cart</button>
+                </div>
+            </div>
+
+            <!-- 6 -->
+            <div class="food-card">
+                <img src="csk.jpeg">
+                <div class="food-content">
+                    <h3>Peri Peri chicken strips -(6Pc)</h3>
+                    <div class="calories">🔥 717 kcal</div>
+                    <div class="price">₹319</div>
+                    <button class="add-btn"
+                        onclick="addToCart('Peri Peri chicken strips -(6Pc)',319,'csk.jpeg',717)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- 7 -->
+            <div class="food-card">
+                <img src="aa.jpeg">
+                <div class="food-content">
+                    <h3>Non Veg Snacking Combo With Fries & Pepsi</h3>
+                    <div class="calories">🔥 1200 kcal</div>
+                    <div class="price">₹199</div>
+                    <button class="add-btn"
+                        onclick="addToCart('Non Veg Snacking Combo With Fries & Pepsi',199,'aa.jpeg',1200)">Add to
+                        Cart</button>
+                </div>
+            </div>
+
+            <!-- 8 -->
+            <div class="food-card">
+                <img src="rb.jpeg">
+                <div class="food-content">
+                    <h3>Rice Box Meal</h3>
+                    <div class="calories">🔥 1900 kcal</div>
+                    <div class="price">₹399</div>
+                    <button class="add-btn" onclick="addToCart('Rice Box Meal',399,'rb.jpeg',1900)">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- 9 -->
+            <div class="food-card">
+                <img src="ck.jpeg">
+                <div class="food-content">
+                    <h3>Chocolate Lava Cake</h3>
+                    <div class="calories">🔥 343 kcal</div>
+                    <div class="price">₹119</div>
+                    <button class="add-btn" onclick="addToCart('KFC Choco Lava',119,'ck.jpeg',343)">Add to Cart</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+        /* USER CHECK */
+        let user = localStorage.getItem("yummieUser");
+        if (user) {
+            document.getElementById("navUser").innerText = "👋 " + user;
+        } else {
+            window.location.href = "login.html";
+        }
+
+        /* CART BADGE */
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let count = cart.reduce((total, item) => total + item.quantity, 0);
+            let badge = document.getElementById("cartCount");
+            badge.innerText = count;
+            badge.style.display = count > 0 ? "inline-block" : "none";
+        }
+
+        document.addEventListener("DOMContentLoaded", updateCartCount);
+
+        /* ADD TO CART */
+        function addToCart(name, price, image, calories) {
+
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            let existing = cart.find(item => item.name === name);
+
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    image: image,
+                    calories: calories,
+                    quantity: 1
+                });
+            }
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartCount();
+
+            alert(name + " added to cart!");
+        }
+
+    </script>
+
+</body>
+
+</html>
